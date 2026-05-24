@@ -25,6 +25,7 @@ export * from "./images/uploadImages.js";
 export * from "./images/deleteImages.js";
 
 export * from "./map/getCarMarkerIcon.js";
+export * from "./map/getDistance.js";
 export * from "./map/getIconUrl.js";
 export * from "./map/getPickerMarkerIcon.js";
 export * from "./map/getTripLocation.js";

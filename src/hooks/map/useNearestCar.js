@@ -1,57 +1,68 @@
 import { useCallback } from "react";
 
-export const useNearestCar = (filteredCars, setIndex, mapRef, showMessage) => {
+import { getDistance, getCarName } from "../../utils";
+
+export const useNearestCar = (
+    filteredCars,
+    setIndex,
+    mapRef,
+    showMessage
+) => {
     return useCallback(() => {
         if (!navigator.geolocation) {
-            showMessage("Геолокація не підтримується вашим браузером!");
+            showMessage("Геолокація не підтримується!");
             return;
         }
 
         navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const userCoords = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                }
+            ({ coords }) => {
+                const userLatitude = coords.latitude;
+                const userLongitude = coords.longitude;
 
-                let nearestIndex = -1;
+                let nearestCar = null;
                 let minDistance = Infinity;
-                let nearestCoords = null;
 
-                filteredCars.forEach((car, idx) => {
-                    if (!car.lat || !car.lng) return;
+                filteredCars.forEach((car, originalIndex) => {
+                    if (car.status === "unavailable" || !car.lat || !car.lng) return;
 
-                    const carCoords = {
-                        lat: Number(car.lat),
-                        lng: Number(car.lng),
-                    };
-
-                    const distance = Math.sqrt(
-                        Math.pow(userCoords.lat - carCoords.lat, 2) +
-                        Math.pow(userCoords.lng - carCoords.lng, 2)
+                    const distance = getDistance(
+                        userLatitude,
+                        userLongitude,
+                        Number(car.lat),
+                        Number(car.lng)
                     );
 
                     if (distance < minDistance) {
                         minDistance = distance;
-                        nearestIndex = idx;
-                        nearestCoords = carCoords;
+                        nearestCar = {
+                            ...car,
+                            index: originalIndex
+                        };
                     }
                 });
 
-                if (nearestIndex !== -1) {
-                    setIndex(nearestIndex);
-
-                    if (mapRef.current && nearestCoords) {
-                        mapRef.current.panTo(nearestCoords);
-                    }
-                } else {
+                if (!nearestCar) {
                     showMessage("Доступних автомобілів не знайдено!");
+                    return;
                 }
+
+                setIndex(nearestCar.index);
+
+                mapRef.current?.panTo({
+                    lat: Number(nearestCar.lat),
+                    lng: Number(nearestCar.lng)
+                });
+
+                showMessage(`${getCarName(nearestCar)} за ${minDistance.toFixed(2)} км`);
             },
             () => {
-                showMessage("Неможливо визначити ваше місцезнаходження!");
+                showMessage("Неможливо визначити місцезнаходження");
             },
-            {enableHighAccuracy: true}
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0,
+            }
         );
     }, [filteredCars, setIndex, mapRef, showMessage]);
-}
+};
