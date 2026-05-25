@@ -7,104 +7,104 @@ config:
 ---
 erDiagram
     CARS {
-        string id "ID"
-        string brand "Марка"
-        string model "Модель"
-        string licensePlate "Номерний знак"
-        string status "Статус"
-        string transmissionType "Тип трансмісії"
-        string powertrainType "Тип силової установки"
-        string bodyType "Тип кузова"
-        string driveType "Тип приводу"
-        string color "Колір"
-        int64 year "Рік випуску"
-        int64 mileage "Пробіг"
-        int64 pricePerDay "Вартість за добу"
-        int64 seats "Кількість місць"
-        int64 averageRating "Рейтинг"
-        int64 ratingCount "Кількість оцінок"
-        map battery "Батарея"
-        map engine "Двигун"
-        array images "Фотографії"
-        boolean isLocked "Доступ"
-        geopoint location "Місцезнаходження"
+        string id
+        string brand
+        string model
+        string licensePlate
+        string status
+        string transmissionType
+        string powertrainType
+        string bodyType
+        string driveType
+        string color
+        int64 year
+        int64 mileage
+        int64 pricePerDay
+        int64 seats
+        int64 averageRating
+        int64 ratingCount
+        map battery
+        map engine
+        array images
+        boolean isLocked
+        geopoint location
     }
 
     ENGINE {
-        string fuelType "Тип палива"
-        int64 displacement "Об'єм двигуна"
+        string fuelType
+        double displacement
     }
 
     BATTERY {
-        int64 capacity "Ємність батареї"
-        int64 range "Запас ходу"
+        int64 capacity
+        int64 range
     }
 
     LOCATION {
-        int64 latitude "Широта"
-        int64 longitude "Довгота"
+        double latitude
+        double longitude
     }
 
     USERS {
-        string id "ID"
-        string firstName "Ім'я"
-        string lastName "Прізвище"
-        string email "Електронна адреса"
-        string phone "Номер телефону"
-        string role "Роль"
-        string verificationStatus "Верифікація"
-        boolean isBlocked "Статус"
-        timestamp birthDate "Дата народження"
-        timestamp createdAt "Дата створення"
+        string id
+        string firstName
+        string lastName
+        string email
+        string phone
+        string role
+        string verificationStatus
+        boolean isBlocked
+        timestamp birthDate
+        timestamp createdAt
     }
 
     BOOKINGS {
-        string id "ID"
-        string carId "ID автомобіля"
-        string userId "ID користувача"
-        string tripId "ID поїздки"
-        string status "Статус"
-        int64 price "Вартість"
-        timestamp plannedStart "Запланований початок"
-        timestamp plannedEnd "Заплановане завершення"
-        timestamp expiresAt "Дедлайн оплати"
-        timestamp createdAt "Дата створення"
+        string id
+        string carId
+        string userId
+        string tripId
+        string status
+        int64 price
+        timestamp plannedStart
+        timestamp plannedEnd
+        timestamp expiresAt
+        timestamp createdAt
     }
 
     TRIPS {
-        string id "ID поїздки"
-        string carId "ID автомобіля"
-        string userId "ID користувача"
-        string bookingId "ID бронювання"
-        string conditionStartId "ID Початкової фотофіксації стану"
-        string conditionEndId "ID Кінцевої фотофіксації стану"
-        string status "Статус"
-        int64 price "Вартість"
-        int64 additionalCharge "Доплата"
-        int64 totalPrice "Загальна вартість"
-        int64 rating "Рейтинг"
-        timestamp actualStart "Фактичний початок"
-        timestamp actualEnd "Фактичне завершення"
-        geopoint startLocation "Початкове місцезнаходження"
-        geopoint endLocation "Кінцеве місцезнаходження"
+        string id
+        string carId
+        string userId
+        string bookingId
+        string conditionStartId
+        string conditionEndId
+        string status
+        int64 price
+        int64 additionalCharge
+        int64 totalPrice
+        int64 rating
+        timestamp actualStart
+        timestamp actualEnd
+        geopoint startLocation
+        geopoint endLocation
     }
 
     CAR_CONDITIONS {
-        string id "ID"
-        string carId "ID автомобіля"
-        string userId "ID користувача"
-        string tripId "ID поїздки"
-        string conditionType "Стан"
-        string description "Опис"
-        int64 mileage "Пробіг"
-        array images "Фотографії"
-        map energyLevel "Енергетичний рівень"
-        timestamp createdAt "Дата створення"
+        string id
+        string carId
+        string userId
+        string tripId
+        string conditionType
+        string description
+        int64 mileage
+        array images
+        map energyLevel
+        timestamp createdAt
     }
 
     ENERGY_LEVEL {
-        int64 batteryPercent "Рівень заряду батареї"
-        int64 fuelPercent "Рівень пального"
+        int64 batteryPercent
+        int64 fuelPercent
     }
 
     CARS ||--|| ENGINE : "містить"
