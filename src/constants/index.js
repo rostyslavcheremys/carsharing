@@ -7,16 +7,18 @@ export * from "./bookings/history.js";
 export * from "./bookings/options.js";
 export * from "./bookings/table.jsx";
 
-export * from "./carCondition/defaults.js";
-export * from "./carCondition/details.jsx";
-export * from "./carCondition/fields.js";
-export * from "./carCondition/options.js";
+export * from "./carConditions/defaults.js";
+export * from "./carConditions/details.jsx";
+export * from "./carConditions/fields.js";
+export * from "./carConditions/options.js";
 
 export * from "./cars/actions.js";
 export * from "./cars/defaults.js";
 export * from "./cars/details.jsx";
 export * from "./cars/options.js";
 export * from "./cars/table.jsx";
+
+export * from "./dashboard/chart.js";
 
 export * from "./map/constants.js";
 export * from "./map/defaults.js";

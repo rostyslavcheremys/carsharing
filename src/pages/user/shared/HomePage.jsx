@@ -1,11 +1,9 @@
-import  { Loader, HomeHero } from "../../../components";
+import  { HomeHero } from "../../../components";
 
 export const HomePage = () => {
     return (
-        <Loader>
-            <div className="page page__content">
-                <HomeHero />
-            </div>
-        </Loader>
+        <div className="page page__content">
+            <HomeHero />
+        </div>
     );
 }
