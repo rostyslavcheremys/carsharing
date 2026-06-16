@@ -9,7 +9,7 @@
     min-width:0;
 }
 
-@media (max-width:1000px) {
+@media (max-width:1290px) {
     .dashboard {
         grid-template-columns: 1fr;
     }

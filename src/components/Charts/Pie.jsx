@@ -25,7 +25,8 @@ export const Pie = ({
                         innerRadius: 80,
                     }
                 ]}
-                width={300}
+                height={300}
+                width={400}
             />
         </div>
     );
