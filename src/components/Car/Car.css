@@ -15,6 +15,7 @@
 
 .car-images__slider {
     display: flex;
+    align-items: center;
     overflow-x: auto;
     scroll-behavior: smooth;
     gap: 15px;
