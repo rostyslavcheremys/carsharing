@@ -43,4 +43,16 @@
     .hero {
         flex-direction: column;
     }
+
+    .hero__title {
+        font-size: 58px;
+    }
+
+    .hero__subtitle {
+        font-size: 12px;
+    }
+
+    .hero__image {
+        display: none;
+    }
 }
