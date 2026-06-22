@@ -1,0 +1,16 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 30px;
+    width: 100%;
+}
+
+.dashboard > * {
+    min-width:0;
+}
+
+@media (max-width:1290px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,63 +1,74 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useLayoutEffect, useCallback } from "react";
 
 import { ArrowBackIcon, ArrowForwardIcon } from "../../libs/mui-icons";
-
 import { ActionIconButton, ImageItem } from "../../components";
 
 export const CarImages = ({ images }) => {
     const sliderRef = useRef(null);
 
     const [canScrollLeft, setCanScrollLeft] = useState(false);
-    const [canScrollRight, setCanScrollRight] = useState(true);
+    const [canScrollRight, setCanScrollRight] = useState(false);
+
+    const checkScroll = useCallback(() => {
+        const el = sliderRef.current;
+
+        if (!el) return;
+
+        const maxScrollLeft = el.scrollWidth - el.clientWidth;
+
+        setCanScrollLeft(el.scrollLeft > 0);
+        setCanScrollRight(el.scrollLeft < maxScrollLeft);
+    }, []);
 
     const scrollLeft = () => {
         const el = sliderRef.current;
         if (!el) return;
 
-        el.scrollBy({
-            left: -el.clientWidth,
-            behavior: "smooth",
-        });
-    }
+        el.scrollBy({ left: -el.clientWidth, behavior: "smooth" });
+    };
 
     const scrollRight = () => {
         const el = sliderRef.current;
         if (!el) return;
 
-        el.scrollBy({
-            left: el.clientWidth,
-            behavior: "smooth",
-        });
-    }
+        el.scrollBy({ left: el.clientWidth, behavior: "smooth" });
+    };
 
-    const checkScroll = () => {
+    useLayoutEffect(() => {
         const el = sliderRef.current;
         if (!el) return;
 
-        setCanScrollLeft(el.scrollLeft > 0);
-        setCanScrollRight(
-            el.scrollLeft + el.clientWidth < el.scrollWidth
-        );
-    }
+        const raf = requestAnimationFrame(() => {
+            checkScroll();
+        });
 
-    useEffect(() => {
-        checkScroll();
-    }, [images]);
+        const resizeObserver = new ResizeObserver(() => {
+            checkScroll();
+        });
 
-    return(
+        resizeObserver.observe(el);
+
+        return () => {
+            cancelAnimationFrame(raf);
+            resizeObserver.disconnect();
+        };
+    }, [images, checkScroll]);
+
+    return (
         <div className="car-images">
             <div className="car-images__container">
                 <div className="car-images__wrapper">
                     <div
                         className="car-images__slider"
-                        onScroll={checkScroll}
                         ref={sliderRef}
+                        onScroll={checkScroll}
                     >
-                        {images.map((item, index) => (
+                        {images.map((item) => (
                             <ImageItem
-                                key={index}
+                                key={item}
                                 src={item}
-                                alt={`image_${index + 1}`}
+                                alt="car"
+                                onLoad={checkScroll}
                             />
                         ))}
                     </div>
@@ -75,11 +86,10 @@ export const CarImages = ({ images }) => {
                             className="car-images__button"
                             disabled={!canScrollRight}
                             onClick={scrollRight}
-
                         />
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};

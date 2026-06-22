@@ -2,6 +2,8 @@ import "./Actions/Actions.css";
 import "./Auth/Auth.css";
 import "./Buttons/Buttons.css";
 import "./Car/Car.css";
+import "./Charts/Charts.css";
+import "./Dashboard/Dashboard.css";
 import "./Details/Details.css";
 import "./Dialogs/Dialogs.css";
 import "./FormControllers/FormControllers.css";

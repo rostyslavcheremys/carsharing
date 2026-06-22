@@ -40,7 +40,8 @@ export const DriverVerificationPage = () => {
 
             await UserService.approve(user?.id);
 
-            showMessage(DRIVER_VERIFICATION_MESSAGES.SUCCESS);
+            showMessage(DRIVER_VERIFICATION_MESSAGES.SUCCESS,
+                () => navigate(USER.HOME, { replace: true }));
         } catch (error) {
             showMessage(getErrorMessage(error));
         } finally {

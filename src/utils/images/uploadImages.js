@@ -14,7 +14,7 @@ export const uploadImages = async (files, folder, id) => {
 
     try {
         const urls = await Promise.all(
-            files.map(async (file, index) => {
+            files.map(async (file) => {
                 if (typeof file === 'string') return file;
 
                 const options = {
@@ -25,10 +25,10 @@ export const uploadImages = async (files, folder, id) => {
                 };
 
                 const compressedFile = await imageCompression(file, options);
-                const fileName = `image_${index + 1}.webp`;
+                const fileName = `${crypto.randomUUID()}.webp`;
                 const storageRef = ref(storage, `${folder}/${id}/${fileName}`);
-
                 const snapshot = await uploadBytes(storageRef, compressedFile);
+
                 uploadedRefs.push(storageRef);
 
                 return await getDownloadURL(snapshot.ref);

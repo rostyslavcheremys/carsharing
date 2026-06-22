@@ -12,6 +12,12 @@ export * from "./Buttons/NavigateIconButton.jsx";
 export * from "./Car/CarForm.jsx";
 export * from "./Car/CarImages.jsx";
 
+export * from "./Charts/Bar.jsx";
+export * from "./Charts/Line.jsx";
+export * from "./Charts/Pie.jsx";
+
+export * from "./Dashboard/Dashboard.jsx";
+
 export * from "./Details/Details.jsx";
 export * from "./Details/DetailsItem.jsx";
 export * from "./Details/DetailsLink.jsx";

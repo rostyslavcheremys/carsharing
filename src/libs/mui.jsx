@@ -26,4 +26,10 @@ export {
     LocalizationProvider,
 } from "@mui/x-date-pickers";
 
+export {
+    PieChart,
+    BarChart,
+    LineChart
+} from "@mui/x-charts";
+
 export { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

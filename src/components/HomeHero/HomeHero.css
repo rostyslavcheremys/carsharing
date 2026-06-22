@@ -37,3 +37,10 @@
     width: 350px;
     height: 350px;
 }
+
+
+@media (max-width: 920px) {
+    .hero {
+        flex-direction: column;
+    }
+}

@@ -63,6 +63,8 @@ export const Map = ({
         reset();
     }
 
+    console.log(filteredCars);
+
     return(
         <Loader isLoading={!isLoaded}>
             <div className="map-container" ref={wrapperRef}>
