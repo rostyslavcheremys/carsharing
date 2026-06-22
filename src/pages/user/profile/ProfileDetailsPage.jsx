@@ -27,12 +27,12 @@ export const ProfileDetailsPage = () => {
                 <Details data={user} details={PROFILE_DETAILS} />
 
                 <div className="page__buttons">
-                    <AppButton
+                   {/* <AppButton
                         type="button"
                         label="Редагувати"
                         onClick={() => navigate(USER.profileEdit(user.id))}
                         disabled={isLoading || !user?.id}
-                    />
+                    />*/}
 
                     <AppButton
                         type="button"
